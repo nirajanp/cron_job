@@ -1,0 +1,35 @@
+Create a cron jobthat execute every day call a script. The script should gzip some sample files that are created today. You should not create the mock file, your script should search the operating system and identify those files automatically, by looking at the current date(today).
+
+# This first line tells the compiler to use sh compiler to compile this code. 
+#! /bin/sh
+
+# Today's date is stored in variable TODAY
+TODAY=`date +"%m/%d/%Y"`
+
+# Prints out today's date
+echo $TODAY
+
+# find command is used to find all the files or directoies.
+# The use of -type f will find only files and -newermt compares
+# timestamp of the current files with reference The result 
+# is stored in VAR.
+VAR=$(find ~/workingDir -type f -newermt "$TODAY")
+
+# All the files that are stored in VAR are printed.
+echo $VAR
+
+# Removes /Dir and any contents inside directory.
+rm -r ~/workingDir/Dir
+
+# Creates a new directory named /Dir
+mkdir ~/workingDir/Dir
+
+# This will copy the result of VAR into specified directory.
+cp -r $VAR ~/workingDir/Dir/
+
+# This command will gzip all the files present in the specified
+# directory.
+gzip -r ~/workingDir/Dir
+
+# Explanation Video Link
+https://www.loom.com/share/c8ce767f554d4134b21674e8117464c5?from_recorder=1
